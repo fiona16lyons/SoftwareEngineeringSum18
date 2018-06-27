@@ -1,12 +1,15 @@
 /**
  * This file contains the Board class.  
+ * 
+ * @author Fiona Lyons
+ * @version 1.0
  */
 
 public class Board
 {
 	//variables
 	private Category [] categories;	// array of categories loaded in
-	private int currentCategory;	// for adding categories
+	private int currentCategory;	// for adding category
 	
 	//constructor 
 	Board()
@@ -24,13 +27,13 @@ public class Board
 	 * @param category category to check
 	 * @return question string
 	 */
-	public String showQuestion(int category)
+	public String getQuestion(int category)
 	{
 		try
 		{
-			if (category < 0 || category > 5)
+			if (category > 0 && category < 5)
 			{	// make sure category is valid
-				return this.categories[category].getQuestion().printQuestion();
+				return this.categories[category].getQuestion().getQuestion();
 			}
 			else
 			{
@@ -46,6 +49,108 @@ public class Board
 	}
 	
 	/**
+	 * This method returns the category's next answer as a string
+	 * @param category category to check
+	 * @return answer string
+	 */
+	public String getAnswer(int category)
+	{
+		try
+		{
+			if (category > 0 && category < 5)
+			{	// make sure category is valid
+				return this.categories[category].getQuestion().getAnswer();
+			}
+			else
+			{
+				throw new Exception("Unable to show answer - invalid " +
+						"category selection.");
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+			return null;
+		}
+	}
+	
+	/**
+	 * This method returns the value of the category's next wuestion
+	 * @param category category to check
+	 * @return question value
+	 */
+	public int getValue(int category)
+	{
+		try
+		{
+			if (category > 0 && category < 5)
+			{	// make sure category is valid
+				return this.categories[category].getQuestion().getValue();
+			}
+			else
+			{
+				throw new Exception("Unable to show value - invalid " +
+						"category selection.");
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+			return -1; 
+		}
+	}
+	
+	/**
+	 * This function sets the question in the given category as answered.
+	 * @param category category to be checked.
+	 */
+	public void answer(int category)
+	{
+		try
+		{
+			if (category > 0 && category < 5)
+			{	// make sure category is valid
+				this.categories[category].getQuestion().answer();
+			}
+			else
+			{
+				throw new Exception("Unable to show answer - invalid " +
+						"category selection.");
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+		}
+	}
+	
+	/**
+	 * This method adds a new category type to the board. This should be done 
+	 * before any questions are added to the category.
+	 * @param category name of category
+	 */
+	public void addCategory(String category)
+	{
+		try
+		{
+			if (this.currentCategory < 5)
+			{
+				this.categories[this.currentCategory] = new Category(category, this.currentCategory);
+				this.currentCategory ++;
+			}
+			else
+			{
+				throw new Exception("Unable to add cateogry " + category +
+						" to board.");
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+		}
+	}
+	
+	/**
 	 * This method adds a question to the specified category
 	 * @param category category to be added to 
 	 * @param question question string
@@ -56,7 +161,7 @@ public class Board
 	{
 		try
 		{
-			if (category < 0 || category > 5)
+			if (category > 0 && category < 5)
 			{	// make sure category is valid
 				this.categories[category].addQuestion(question, answer, value);
 			}
@@ -71,4 +176,7 @@ public class Board
 			System.out.println("Exception caught: " + e.getMessage());
 		}
 	}
+	
+	
+	
 }

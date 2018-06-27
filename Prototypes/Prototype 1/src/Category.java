@@ -12,13 +12,15 @@ public class Category
 {
 	// variables
 	private String category;		// display name of category
+	private int categoryNumber;		// index on board
 	private Question [] questions;	// list of questions in category
 	private int currentQuestion;	// points to current question in list
 	
 	// constructor
-	Category(String category)
+	Category(String category, int categoryNumber)
 	{
 		this.category = category;
+		this.categoryNumber = categoryNumber;
 		this.questions = new Question[5];
 		this.currentQuestion = 0;	// top of questions array
 	}

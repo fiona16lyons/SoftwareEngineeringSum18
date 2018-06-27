@@ -26,7 +26,7 @@ public class Question
 	 * This method retrieves the question string.
 	 * @return question
 	 */
-	public String printQuestion()
+	public String getQuestion()
 	{
 		return this.question;
 	}
@@ -35,7 +35,7 @@ public class Question
 	 * This method retrieves the answer string.
 	 * @return answer
 	 */
-	public String printAnswer()
+	public String getAnswer()
 	{
 		return this.answer;
 	}
