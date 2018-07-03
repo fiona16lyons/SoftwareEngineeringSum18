@@ -114,7 +114,6 @@ public class Game
 		
 		//print category
 		System.out.println("You got: " + this.gameWheel.getSlice(slice) + "!");
-		slice = 0;
 		// select the question in the category if possible
 		if (slice >= 0 && slice < 6)
 		{

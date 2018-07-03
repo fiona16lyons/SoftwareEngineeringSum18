@@ -19,7 +19,7 @@ public class Prototype1
 {
 	public static void main(String [] args)
 	{
-		String myInputFile = "input/sample_questions.txt";
+		String myInputFile = args[0];
 		try
 		{
 			BufferedReader readIn = new BufferedReader(new FileReader(myInputFile));
