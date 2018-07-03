@@ -3,6 +3,9 @@ import java.util.Random;
 /**
  * This file contains the Wheel class, which represents the wheel in Wheel
  * of Jeopardy. 
+ * 
+ * @author Fiona Lyons
+ * @version 1.0
  */
 
 public class Wheel
@@ -98,6 +101,21 @@ public class Wheel
 		return new Random().nextInt(12);
 	}
 	
+	/**
+	 * This function prints the wheel as a plaintext string.
+	 */
+	public String toString()
+	{
+		String rtn = "";
+		for (int i=0;i<this.slices.length;i++)
+		{
+			rtn += this.slices[i].getType();
+			rtn += "\n";
+			rtn += this.slices[i].getName();
+			rtn += "\n";
+		}
+		return rtn;
+	}
 	
 	
 }

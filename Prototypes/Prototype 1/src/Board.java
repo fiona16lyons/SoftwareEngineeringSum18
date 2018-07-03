@@ -23,6 +23,16 @@ public class Board
 	// are in that category? maybe new category on a certain line??
 	
 	/**
+	 * This method returns the current category we are on, for adding 
+	 * new categories
+	 * @return current category
+	 */
+	public int getCurrentCategory()
+	{
+		return this.currentCategory;
+	}
+	
+	/**
 	 * This method shows the category's next question as a string
 	 * @param category category to check
 	 * @return question string
@@ -135,7 +145,7 @@ public class Board
 		{
 			if (this.currentCategory < 5)
 			{
-				this.categories[this.currentCategory] = new Category(category, this.currentCategory);
+				this.categories[this.currentCategory] = new Category(category);
 				this.currentCategory ++;
 			}
 			else
@@ -163,7 +173,15 @@ public class Board
 		{
 			if (category > 0 && category < 5)
 			{	// make sure category is valid
-				this.categories[category].addQuestion(question, answer, value);
+				if (!this.categories[category].isFull())
+				{
+					this.categories[category].addQuestion(question, answer, value);
+				}
+				else
+				{
+					throw new Exception("Requested category " + this.categories[category].getCategory()
+							+ " is full! Cannot add another question. ");
+				}
 			}
 			else
 			{
@@ -177,6 +195,18 @@ public class Board
 		}
 	}
 	
+	/**
+	 * This function returns the board as a plaintext string.
+	 */
+	public String toString()
+	{
+		String rtn = "";
+		for (int i=0;i<this.currentCategory;i++)
+		{
+			this.categories[i].toString();
+		}
+		return rtn;
+	}
 	
 	
 }

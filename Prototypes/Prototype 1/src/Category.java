@@ -12,15 +12,13 @@ public class Category
 {
 	// variables
 	private String category;		// display name of category
-	private int categoryNumber;		// index on board
 	private Question [] questions;	// list of questions in category
 	private int currentQuestion;	// points to current question in list
 	
 	// constructor
-	Category(String category, int categoryNumber)
+	Category(String category)
 	{
 		this.category = category;
-		this.categoryNumber = categoryNumber;
 		this.questions = new Question[5];
 		this.currentQuestion = 0;	// top of questions array
 	}
@@ -68,6 +66,15 @@ public class Category
 	}
 	
 	/**
+	 * This method returns the name of the requested category
+	 * @return category name
+	 */
+	public String getCategory()
+	{
+		return this.category;
+	}
+	
+	/**
 	 * This method returns the next question
 	 * @return question
 	 */
@@ -76,9 +83,8 @@ public class Category
 		try
 		{	// check if the category is empty
 			if (this.currentQuestion > 0)
-			{	// return the 
-				this.currentQuestion--;	// decrement currentQuestion ptr
-				return this.questions[this.currentQuestion+1];
+			{	// return the question
+				return this.questions[this.currentQuestion];
 			}
 			else
 			{
@@ -95,6 +101,29 @@ public class Category
 	}
 	
 	/**
+	 * This function answers the next question in a category.
+	 */
+	public void answerQuestion()
+	{
+		try
+		{	// check if the category is empty
+			if (this.currentQuestion > 0)
+			{	// return the 
+				this.currentQuestion--;	// decrement currentQuestion ptr
+			}
+			else
+			{
+				throw new Exception("Unable to answer question from category " +
+						this.category + ", category is empty. ");
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+		}
+	}
+	
+	/**
 	 * This method returns whether or not the category contains the maximum
 	 * allowed five questions.
 	 * @return true if contains five questions, false otherwise
@@ -102,5 +131,25 @@ public class Category
 	public boolean isFull()
 	{
 		return (this.currentQuestion == 5);
+	}
+	
+	/**
+	 * This function returns the category as a plaintext string.
+	 */
+	public String toString()
+	{
+		String rtn = "";
+		rtn += this.category;
+		rtn += "\n----------------------\n";
+		for (int j=0;j<this.currentQuestion;j++)
+		{
+			rtn += this.questions[j].getQuestion();
+			rtn += "	";
+			rtn += this.questions[j].getAnswer();
+			rtn += "	";
+			rtn += this.questions[j].getValue();
+			rtn += "\n";
+		}
+		return rtn;
 	}
 }
