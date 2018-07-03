@@ -43,19 +43,21 @@ public class Category
 				{	// Check if values of questions are in descending order
 					if (value > this.questions[i].getValue())
 					{	// if not, throw exception.
-						throw new Exception("Unable to add requested question " +
+						System.out.println("Unable to add requested question " +
 								question + " to category " + this.category + ",\n " +
 								" Values of questions must be in descending" +
 								" order : " + value + " > " + 
 								this.questions[i].getValue());
+						throw new Exception("Bad value");
 					}
 				}
 				this.currentQuestion++;	// point to new top
 			}
 			else
 			{
-				throw new Exception("Category " + this.category + " is full! " +
+				System.out.println("Category " + this.category + " is full! " +
 						" unable to add new question: " + question);
+				throw new Exception("Category full");
 			}
 		}
 		catch (Exception e)
@@ -82,14 +84,15 @@ public class Category
 	{
 		try
 		{	// check if the category is empty
-			if (this.currentQuestion > 0)
+			if (this.currentQuestion > 0 && this.currentQuestion <= this.questions.length)
 			{	// return the question
-				return this.questions[this.currentQuestion];
+				return this.questions[this.currentQuestion-1];
 			}
 			else
 			{
-				throw new Exception("Unable to retrieve question from category " +
+				System.out.println("Unable to retrieve question from category " +
 						this.category + ", category is empty. ");
+				throw new Exception("Empty category");
 			}
 		}
 		catch (Exception e)
@@ -101,6 +104,35 @@ public class Category
 	}
 	
 	/**
+	 * This function returns a specific question at an index
+	 * @param index index of question
+	 * @return question
+	 */
+	public Question getQuestion(int index)
+	{
+		try
+		{	// check if the category is empty
+			if (index >= 0 && index < 5)
+			{	// return the question
+				return this.questions[index];
+			}
+			else
+			{
+				System.out.println("Unable to retrieve question from category " +
+						this.category + ", invalid index. ");
+				throw new Exception("bad index");
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+			return null;
+		}
+		
+	}
+	
+	
+	/**
 	 * This function answers the next question in a category.
 	 */
 	public void answerQuestion()
@@ -110,10 +142,11 @@ public class Category
 			if (this.currentQuestion > 0)
 			{	// return the 
 				this.currentQuestion--;	// decrement currentQuestion ptr
+				this.questions[this.currentQuestion].answer();
 			}
 			else
 			{
-				throw new Exception("Unable to answer question from category " +
+				System.out.println("Unable to answer question from category " +
 						this.category + ", category is empty. ");
 			}
 		}
@@ -130,7 +163,24 @@ public class Category
 	 */
 	public boolean isFull()
 	{
-		return (this.currentQuestion == 5);
+		return (this.currentQuestion == this.questions.length);
+	}
+	
+	/**
+	 * This function returns whether or not every question in a category
+	 * has been answered
+	 * @return true if empty
+	 */
+	public boolean isEmpty()
+	{
+		if (this.currentQuestion <= 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	/**
@@ -144,12 +194,13 @@ public class Category
 		for (int j=0;j<this.currentQuestion;j++)
 		{
 			rtn += this.questions[j].getQuestion();
-			rtn += "	";
+			rtn += "\t\t";
 			rtn += this.questions[j].getAnswer();
-			rtn += "	";
+			rtn += "\t\t";
 			rtn += this.questions[j].getValue();
 			rtn += "\n";
 		}
+		rtn += "\n----------------------\n";
 		return rtn;
 	}
 }

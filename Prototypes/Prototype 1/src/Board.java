@@ -33,6 +33,43 @@ public class Board
 	}
 	
 	/**
+	 * This function checks to see if a category on the board is empty, i.e.
+	 * every question has been answered
+	 * @param index index of category
+	 * @return true if empty
+	 */
+	public boolean categoryEmpty(int index)
+	{
+		if (this.categories[index].isEmpty())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	/**
+	 * This function returns the name of a category
+	 * @param index where category is stored
+	 * @return name of category
+	 */
+	public String getCategory(int index)
+	{
+		if (index >= 0 && index < this.categories.length)
+		{
+			return this.categories[index].getCategory();
+		}
+		else
+		{
+			System.out.println("Invalid category selection.");
+			return "";
+		}
+	}
+	
+	
+	/**
 	 * This method shows the category's next question as a string
 	 * @param category category to check
 	 * @return question string
@@ -41,14 +78,15 @@ public class Board
 	{
 		try
 		{
-			if (category > 0 && category < 5)
+			if (category >= 0 && category < this.categories.length)
 			{	// make sure category is valid
 				return this.categories[category].getQuestion().getQuestion();
 			}
 			else
 			{
-				throw new Exception("Unable to show question - invalid " +
+				System.out.println("Unable to show question - invalid " +
 						"category selection.");
+				throw new Exception("Invalid category");
 			}
 		}
 		catch (Exception e)
@@ -67,14 +105,15 @@ public class Board
 	{
 		try
 		{
-			if (category > 0 && category < 5)
+			if (category >= 0 && category < this.categories.length)
 			{	// make sure category is valid
 				return this.categories[category].getQuestion().getAnswer();
 			}
 			else
 			{
-				throw new Exception("Unable to show answer - invalid " +
+				System.out.println("Unable to show answer - invalid " +
 						"category selection.");
+				throw new Exception("Invalid category");
 			}
 		}
 		catch (Exception e)
@@ -93,14 +132,15 @@ public class Board
 	{
 		try
 		{
-			if (category > 0 && category < 5)
+			if (category >= 0 && category < this.categories.length)
 			{	// make sure category is valid
 				return this.categories[category].getQuestion().getValue();
 			}
 			else
 			{
-				throw new Exception("Unable to show value - invalid " +
+				System.out.println("Unable to show value - invalid " +
 						"category selection.");
+				throw new Exception("Invalid category");
 			}
 		}
 		catch (Exception e)
@@ -118,13 +158,13 @@ public class Board
 	{
 		try
 		{
-			if (category > 0 && category < 5)
+			if (category >= 0 && category < this.categories.length)
 			{	// make sure category is valid
-				this.categories[category].getQuestion().answer();
+				this.categories[category].answerQuestion();
 			}
 			else
 			{
-				throw new Exception("Unable to show answer - invalid " +
+				System.out.println("Unable to answer - invalid " +
 						"category selection.");
 			}
 		}
@@ -143,14 +183,14 @@ public class Board
 	{
 		try
 		{
-			if (this.currentCategory < 5)
+			if (this.currentCategory <= this.categories.length)
 			{
 				this.categories[this.currentCategory] = new Category(category);
 				this.currentCategory ++;
 			}
 			else
 			{
-				throw new Exception("Unable to add cateogry " + category +
+				System.out.println("Unable to add cateogry " + category +
 						" to board.");
 			}
 		}
@@ -171,7 +211,7 @@ public class Board
 	{
 		try
 		{
-			if (category > 0 && category < 5)
+			if (category >= 0 && category < this.categories.length)
 			{	// make sure category is valid
 				if (!this.categories[category].isFull())
 				{
@@ -179,19 +219,20 @@ public class Board
 				}
 				else
 				{
-					throw new Exception("Requested category " + this.categories[category].getCategory()
+					System.out.println("Requested category " + this.categories[category].getCategory()
 							+ " is full! Cannot add another question. ");
 				}
 			}
 			else
 			{
-				throw new Exception("Invalid category call while trying " +
+				System.out.println("Invalid category call while trying " +
 						"to add question: " + question);
 			}
 		}
 		catch (Exception e)
 		{
 			System.out.println("Exception caught: " + e.getMessage());
+			System.out.println("Stack Trace: " + e.getStackTrace());
 		}
 	}
 	
@@ -203,7 +244,7 @@ public class Board
 		String rtn = "";
 		for (int i=0;i<this.currentCategory;i++)
 		{
-			this.categories[i].toString();
+			rtn += this.categories[i].toString();
 		}
 		return rtn;
 	}

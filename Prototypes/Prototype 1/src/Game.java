@@ -55,13 +55,14 @@ public class Game
 						// add it to game board
 						this.gameBoard.addCategory(inDelim[0]);
 						// add it to wheel - 1 indexing 
-						this.gameWheel.addSlice(inDelim[0], this.gameBoard.getCurrentCategory() + 1);
+						this.gameWheel.addSlice(inDelim[0], this.gameBoard.getCurrentCategory());
 						questionIndex = 0;	// reset question index
 					}
 					else
 					{	// add this question to the current category!
-						int val = 600 - questionIndex*100; // determine question value, descending order
-						this.gameBoard.addQuestion(this.gameBoard.getCurrentCategory(), inDelim[0], inDelim[1],val);
+						int val = 2*(500 - questionIndex*100); // determine question value, descending order
+						this.gameBoard.addQuestion(this.gameBoard.getCurrentCategory()-1, inDelim[0], inDelim[1],val);
+						questionIndex++;
 					}
 					lineCounter ++;
 					inString = readIn.readLine();
@@ -90,17 +91,48 @@ public class Game
 		}
 	}
 	
+	/**
+	 * This function returns both the gameWheel and gameBoard as a plain
+	 * text string.
+	 */
+	public String toString()
+	{
+		String rtn = "";
+		rtn += this.gameWheel.toString();
+		rtn += "\n";
+		rtn += this.gameBoard.toString();
+		return rtn;
+	}
+	
+	/**
+	 * This function has the basic functionality of answering a question
+	 */
+	public void takeTurn()
+	{
+		// spin the wheel
+		int slice = this.gameWheel.spin();
+		
+		//print category
+		System.out.println("You got: " + this.gameWheel.getSlice(slice) + "!");
+		slice = 0;
+		// select the question in the category if possible
+		if (slice >= 0 && slice < 6)
+		{
+			System.out.println("Selected category: " + this.gameBoard.getCategory(slice));
+			if (!this.gameBoard.categoryEmpty(slice))
+			{
+				System.out.println("Upcoming Question: " + this.gameBoard.getQuestion(slice));
+				System.out.println("Upcoming Answer: " + this.gameBoard.getAnswer(slice));
+				this.gameBoard.answer(slice);
+			}
+			else
+			{
+				System.out.println("Category empty! Spin again.");
+			}
+		}
+		
+		
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 

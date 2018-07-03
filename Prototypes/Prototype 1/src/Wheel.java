@@ -31,7 +31,7 @@ public class Wheel
 		String [] defaultNames = {"Lose Turn",  "Free Turn", "Player's Choice", "Opponent's Choice", "Bankruptcy", "Double Your Score"}; 
 		for (int i=0;i<6;i=i+1)
 		{	// default slices will be between 7 and 12
-			addSlice(defaultNames[i], i+6);
+			addSlice(defaultNames[i], i+7);
 		}
 	}
 	
@@ -45,19 +45,14 @@ public class Wheel
 	{
 		try
 		{
-			if (this.currentSlice < 7)
-			{	// we're adding a category, use current slice; don't iterate
-				// past 6
-				this.slices[this.currentSlice] = new Slice(name,this.currentSlice);
-				this.currentSlice ++;
-			}
-			else if (this.currentSlice < 12)
+			if (type >=0 && type<=12)
 			{
-				this.slices[this.currentSlice] = new Slice(name,type);
+				this.slices[type-1] = new Slice(name, type);
 			}
 			else
 			{
-				throw new Exception("Unable to add slice " + name + " to wheel.");
+				System.out.println("Unable to add slice " + name + " to wheel.");
+				throw new Exception("Can't add slice");
 			}
 		}
 		catch (Exception e)
@@ -75,13 +70,14 @@ public class Wheel
 	{
 		try
 		{
-			if (type > 0 && type < 5)
+			if (type >= 0 && type <= this.slices.length)
 			{
 				return this.slices[type].getName();
 			}
 			else
 			{
-				throw new Exception("Unable to return slice; invalid type.");
+				System.out.println("Unable to return slice; invalid type.");
+				throw new Exception("Invalid type.");
 			}
 		}
 		catch (Exception e)
@@ -110,7 +106,7 @@ public class Wheel
 		for (int i=0;i<this.slices.length;i++)
 		{
 			rtn += this.slices[i].getType();
-			rtn += "\n";
+			rtn += "\t";
 			rtn += this.slices[i].getName();
 			rtn += "\n";
 		}

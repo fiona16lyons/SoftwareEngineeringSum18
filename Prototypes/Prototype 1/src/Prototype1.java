@@ -19,7 +19,37 @@ public class Prototype1
 {
 	public static void main(String [] args)
 	{
-		
+		String myInputFile = "input/sample_questions.txt";
+		try
+		{
+			BufferedReader readIn = new BufferedReader(new FileReader(myInputFile));
+			System.out.println("Able to read input file!");
+			readIn.close();
+			
+			// Make sure data is loaded in properly
+			Game newGame = new Game(myInputFile);
+			System.out.println(newGame.toString());
+			
+			//Test answering questions
+			newGame.takeTurn();
+			System.out.println("===========");
+			newGame.takeTurn();
+			System.out.println("===========");
+			newGame.takeTurn();
+			System.out.println("===========");
+			newGame.takeTurn();
+			System.out.println("===========");
+			newGame.takeTurn();
+			System.out.println("===========");
+			newGame.takeTurn();
+			System.out.println("===========");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Exception caught: " + e.getMessage());
+			System.out.println("Stack Trace: " + e.getStackTrace());
+			System.out.println("Unable to read input file :-(");
+		}
 	}
 
 }
