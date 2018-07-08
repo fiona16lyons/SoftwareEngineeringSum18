@@ -112,4 +112,14 @@ class Player
 	{
 		this.roundScore = this.roundScore*2;		
 	}
+	
+	/**
+	 * This method simulates a player switching rounds, so their round
+	 * scores are put towards their total scores then zeroed out.
+	 */
+	public void switchRounds()
+	{
+		this.totalScore += roundScore;
+		this.roundScore = 0;
+	}
 }

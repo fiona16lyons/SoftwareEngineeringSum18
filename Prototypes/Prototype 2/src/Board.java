@@ -50,15 +50,42 @@ public class Board
 		}
 	}
 	
+	/**
+	 * This functions checks if all of the questions on the board have been 
+	 * answered, and so the gameboard is empty.
+	 * @return true if empty
+	 */
 	public boolean isEmpty()
 	{
 		for (int i=0;i<this.categories.length;i++)
 		{
-			if (!this.categories[i].isEmpty())
+			if ((this.categories[i] == null) )
+			{
+				//pass
+			}
+			else if (!this.categories[i].isEmpty())
 			{
 				return false;
 			}
 		}
+		return true;
+	}
+	
+	/**
+	 * This function checks if all the questions on the board have been 
+	 * loaded in
+	 * @return true if full
+	 */
+	public boolean isFull()
+	{
+		for (int i=0;i<this.categories.length;i++)
+		{
+			if ((this.categories[i] == null) || (!this.categories[i].isFull()))
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**

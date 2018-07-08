@@ -34,3 +34,39 @@ Movie Catch Phrases
 1967: "What we've got here is a failure to communicate",Cool Hand Luke
 1982: "They're here!",Poltergeist
 1992: "There's no crying in baseball!",A League of Their Own
+Category 1
+question 1,answer 1
+question 2,answer 2
+question 3,answer 3
+question 4,answer 4
+question 5,answer 5
+Category 2
+question 1,answer 1
+question 2,answer 2
+question 3,answer 3
+question 4,answer 4
+question 5,answer 5
+Category 3
+question 1,answer 1
+question 2,answer 2
+question 3,answer 3
+question 4,answer 4
+question 5,answer 5
+Category 4
+question 1,answer 1
+question 2,answer 2
+question 3,answer 3
+question 4,answer 4
+question 5,answer 5
+Category 5
+question 1,answer 1
+question 2,answer 2
+question 3,answer 3
+question 4,answer 4
+question 5,answer 5
+Category 6
+question 1,answer 1
+question 2,answer 2
+question 3,answer 3
+question 4,answer 4
+question 5,answer 5

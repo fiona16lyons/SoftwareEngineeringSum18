@@ -27,7 +27,7 @@ public class Prototype2
 			Game newGame = new Game(myInputFile);
 			System.out.println(newGame.toString());
 			
-			int turnsLeft = 10; // for testing
+			int turnsLeft = 18; // for testing
 			while (turnsLeft > 0)
 			{
 				System.out.println("It's Player " + newGame.getTurn() + "'s turn!");

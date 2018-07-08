@@ -15,9 +15,13 @@ import java.lang.Enum;
 public class Game
 {
 	// Game Objects
-	private Wheel gameWheel;
-	private Board gameBoard;
+	//private Wheel gameWheel;
+	//private Board gameBoard;
+	private Board [] gameBoards; // round 1 and 2 boards
+	private Wheel [] gameWheels; // round 1 and 2 boards
+	
 	private int roundsLeft;
+	private int round;	// current round we're on
 	
 	// player objects
 	private int turn;			// current turn
@@ -26,9 +30,18 @@ public class Game
 	//constructor
 	Game(String inputFile)
 	{
-		this.gameBoard = new Board();
-		this.gameWheel = new Wheel();
-		this.roundsLeft = 50;
+		//this.gameBoard = new Board();
+		//this.gameWheel = new Wheel();
+		
+		this.gameBoards = new Board[2];
+		this.gameBoards[0] = new Board();
+		this.gameBoards[1] = new Board();
+		this.gameWheels = new Wheel[2];
+		this.gameWheels[0] = new Wheel();
+		this.gameWheels[1] = new Wheel();
+
+		this.roundsLeft = 8; // 50 - spins per round
+		this.round = 0;
 		this.turn = 0;
 		
 		// add players into the game
@@ -80,18 +93,37 @@ public class Game
 				{
 					inDelim = inString.split(",");	// assume comma delimited
 					if (inDelim.length == 1)
-					{	// its a new category! 
-						// add it to wheel 0 indexing 
-						this.gameWheel.addSlice(inDelim[0], this.gameBoard.getCurrentCategory());
-						// add it to game board
-						this.gameBoard.addCategory(inDelim[0]);
-						questionIndex = 0;	// reset question index
+					{	// its a new category!
+						System.out.println("New Category!");
+						if (this.gameBoards[0].isEmpty() || !this.gameBoards[0].isFull()) 
+						{ // add to round 1
+							this.gameWheels[0].addSlice(inDelim[0], this.gameBoards[0].getCurrentCategory());
+							// add it to game board
+							this.gameBoards[0].addCategory(inDelim[0]);
+							questionIndex = 0;	// reset question index
+						}
+						else if (!this.gameBoards[1].isFull())
+						{ // add to round 2
+							this.gameWheels[1].addSlice(inDelim[0], this.gameBoards[1].getCurrentCategory());
+							// add it to game board
+							this.gameBoards[1].addCategory(inDelim[0]);
+							questionIndex = 0;	// reset question index
+						}
 					}
 					else
 					{	// add this question to the current category!
-						int val = 2*(500 - questionIndex*100); // determine question value, descending order
-						this.gameBoard.addQuestion(this.gameBoard.getCurrentCategory()-1, inDelim[0], inDelim[1],val);
-						questionIndex++;
+						if (!this.gameBoards[0].isFull()) 
+						{ // add to round 1
+							int val = 2*(500 - questionIndex*100); // determine question value, descending order
+							this.gameBoards[0].addQuestion(this.gameBoards[0].getCurrentCategory()-1, inDelim[0], inDelim[1],val);
+							questionIndex++;
+						}
+						else if (!this.gameBoards[1].isFull()) 
+						{ // add to round 2
+							int val = 2*(500 - questionIndex*100); // determine question value, descending order
+							this.gameBoards[1].addQuestion(this.gameBoards[1].getCurrentCategory()-1, inDelim[0], inDelim[1],val);
+							questionIndex++;
+						}
 					}
 					lineCounter ++;
 					inString = readIn.readLine();
@@ -127,9 +159,13 @@ public class Game
 	public String toString()
 	{
 		String rtn = "";
-		rtn += this.gameWheel.toString();
+		rtn += this.gameWheels[0].toString();
 		rtn += "\n";
-		rtn += this.gameBoard.toString();
+		rtn += this.gameWheels[1].toString();
+		rtn += "\n";
+		rtn += this.gameBoards[0].toString();
+		rtn += "\n";
+		rtn += this.gameBoards[1].toString();
 		return rtn;
 	}
 	
@@ -141,28 +177,57 @@ public class Game
 		System.out.println("Spins Left: " + this.roundsLeft);
 		// decrement rounds
 		this.roundsLeft --;
-		if (this.roundsLeft < 0 || this.gameBoard.isEmpty())
-		{
-			//switch rounds
+		if (this.roundsLeft < 0 || this.gameBoards[this.round].isEmpty())
+		{ //switch rounds
+			if (this.round == 1)
+			{
+				System.out.println("GAME OVER!!!");
+				System.out.println("Total Scores:");
+				this.players[0].switchRounds();
+				this.players[1].switchRounds();
+				System.out.println("Player 0 " + this.players[0].getTotalScore());
+				System.out.println("Player 1 " + this.players[1].getTotalScore());
+				int winner = declareWinner();
+				if (winner != -1)
+				{
+					System.out.println(" PLAYER " + winner + " WINS!!!");
+				}
+				else
+				{
+					System.out.println("ITS A TIE!!!!");
+				}
+				return;
+			}
+			System.out.println("----------");
+			System.out.println("NEW ROUND!!");
+			System.out.println("----------");
+			
+			this.roundsLeft = 8; 	// reset round counter
+			this.round ++;			// move to next round
+			
+			// set player scores 
+			this.players[0].switchRounds();
+			this.players[1].switchRounds();
+			return;
 		}
 		
 		// spin the wheel
-		int slice = this.gameWheel.spin();
+		int slice = this.gameWheels[this.round].spin();
 
 		//print category
-		System.out.println("You got " + slice + " : " + this.gameWheel.getSlice(slice) + "!");
+		System.out.println("You got " + slice + " : " + this.gameWheels[this.round].getSlice(slice) + "!");
 		
 		// select the question in the category if possible
 		if (slice >= 0 && slice < 6)
 		{
-			System.out.println("Selected category: " + this.gameBoard.getCategory(slice));
-			if (!this.gameBoard.categoryEmpty(slice))
+			System.out.println("Selected category: " + this.gameBoards[this.round].getCategory(slice));
+			if (!this.gameBoards[this.round].categoryEmpty(slice))
 			{
-				System.out.println("Upcoming Question: " + this.gameBoard.getQuestion(slice));
-				System.out.println("Upcoming Answer: " + this.gameBoard.getAnswer(slice));
+				System.out.println("Upcoming Question: " + this.gameBoards[this.round].getQuestion(slice));
+				System.out.println("Upcoming Answer: " + this.gameBoards[this.round].getAnswer(slice));
 				
 				// assume the player always answers right for now
-				int val = this.gameBoard.answer(slice);
+				int val = this.gameBoards[this.round].answer(slice);
 				System.out.println("Awarding " + val + " points to player " + this.turn);
 				this.players[this.turn].awardPoints(val);
 				
@@ -209,6 +274,27 @@ public class Game
 		rtn += "Player 0 : " + this.players[0].getRoundScore() + "\t" + this.players[0].getTotalScore() + "\tTokens: " + this.players[0].getTokens() + "\n";
 		rtn += "Player 1 : " + this.players[1].getRoundScore() + "\t" + this.players[1].getTotalScore()+ "\tTokens: " + this.players[1].getTokens();
 		return rtn;
+	}
+	
+	/**
+	 * This function returns the index of the player that wins, or declares a
+	 * tie
+	 * @return index of winner, -1 if tie
+	 */
+	public int declareWinner()
+	{
+		if (this.players[0].getTotalScore() > this.players[1].getTotalScore())
+		{
+			return 0;
+		}
+		else if (this.players[0].getTotalScore() < this.players[1].getTotalScore())
+		{
+			return 1;
+		}
+		else
+		{ //tie!
+			return -1;
+		}
 	}
 }
 
