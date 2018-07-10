@@ -12,7 +12,7 @@ public class Prototype2
 {
 	public static void main(String [] args)
 	{
-		String myInputFile = "input/real_questions.txt"; //args[0];
+		String myInputFile = args[0];//"input/real_questions.txt"; //
 		try
 		{
 			BufferedReader readIn = new BufferedReader(new FileReader(myInputFile));
