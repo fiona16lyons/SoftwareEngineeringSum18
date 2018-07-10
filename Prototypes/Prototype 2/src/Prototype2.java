@@ -1,12 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 /**
-	This is the main startup file for Prototype 1 of the Wheel of Jeopardy
-	game. This prototype covers the following requirements.
-	IO Interface
-	Question class
-	Category class
-	Basic data loading and display
+	This is the main startup file for Prototype 2 of the Wheel of Jeopardy
+	game. 
 	
 	@author Fiona Lyons
 	@version 1.0

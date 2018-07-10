@@ -44,7 +44,7 @@ public class Wheel
 	{
 		try
 		{
-			System.out.println("Slice " + name + " " + type);
+			//System.out.println("Slice " + name + " " + type);
 			if (type >=0 && type<12)
 			{
 				this.slices[type] = new Slice(name, type);

@@ -59,7 +59,7 @@ class Player
 	
 	/**
 	 * This function returns the index of the current player.
-	 * @return
+	 * @return player index
 	 */
 	public int getPlayerIndex()
 	{

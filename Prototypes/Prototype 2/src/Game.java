@@ -65,6 +65,7 @@ public class Game
 	
 	/**
 	 * Returns whose turn it is to play
+	 * @return whose turn it is
 	 */
 	public int getTurn()
 	{
@@ -94,7 +95,6 @@ public class Game
 					inDelim = inString.split(",");	// assume comma delimited
 					if (inDelim.length == 1)
 					{	// its a new category!
-						System.out.println("New Category!");
 						if (this.gameBoards[0].isEmpty() || !this.gameBoards[0].isFull()) 
 						{ // add to round 1
 							this.gameWheels[0].addSlice(inDelim[0], this.gameBoards[0].getCurrentCategory());
@@ -120,7 +120,7 @@ public class Game
 						}
 						else if (!this.gameBoards[1].isFull()) 
 						{ // add to round 2
-							int val = 2*(500 - questionIndex*100); // determine question value, descending order
+							int val = 2*2*(500 - questionIndex*100); // determine question value, descending order
 							this.gameBoards[1].addQuestion(this.gameBoards[1].getCurrentCategory()-1, inDelim[0], inDelim[1],val);
 							questionIndex++;
 						}
@@ -196,6 +196,7 @@ public class Game
 				{
 					System.out.println("ITS A TIE!!!!");
 				}
+				System.exit(1);
 				return;
 			}
 			System.out.println("----------");
