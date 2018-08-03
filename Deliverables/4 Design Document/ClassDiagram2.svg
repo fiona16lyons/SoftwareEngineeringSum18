@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg height="772" version="1.1" width="1484" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffffff" height="136" stroke="#ffffff" stroke-width="1" width="216" x="14" y="622"/>
+<rect fill="none" height="136" stroke="#000000" stroke-width="1" width="216" x="14" y="622"/>
+<text font-family="Dialog" font-size="12" x="108" y="636">
+Slice</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="216" x="14" y="645"/>
+<text font-family="Dialog" font-size="12" x="18" y="660">
+type : int</text>
+<text font-family="Dialog" font-size="12" x="18" y="676">
+name : String</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="216" x="14" y="701"/>
+<text font-family="Dialog" font-size="12" x="18" y="716">
+getName() : String</text>
+<text font-family="Dialog" font-size="12" x="18" y="732">
+getType() : int</text>
+<rect fill="#ffffff" height="248" stroke="#ffffff" stroke-width="1" width="328" x="822" y="454"/>
+<rect fill="none" height="248" stroke="#000000" stroke-width="1" width="328" x="822" y="454"/>
+<text font-family="Dialog" font-size="12" x="961" y="468">
+Category</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="328" x="822" y="478"/>
+<text font-family="Dialog" font-size="12" x="826" y="493">
+category : String</text>
+<text font-family="Dialog" font-size="12" x="826" y="510">
+currentQuestion : int</text>
+<text font-family="Dialog" font-size="12" x="826" y="527">
+questions : Array&lt;Question&gt;</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="328" x="822" y="547"/>
+<text font-family="Dialog" font-size="12" x="826" y="562">
+addQuestion(question : String,answer : String,value : int)</text>
+<text font-family="Dialog" font-size="12" x="826" y="579">
+answerQuestion() : int</text>
+<text font-family="Dialog" font-size="12" x="826" y="596">
+getCategory() : String</text>
+<text font-family="Dialog" font-size="12" x="826" y="613">
+getQuestion() : Question</text>
+<text font-family="Dialog" font-size="12" x="826" y="630">
+getQuestion(index : int) : Question</text>
+<text font-family="Dialog" font-size="12" x="826" y="647">
+isEmpty() : boolean</text>
+<text font-family="Dialog" font-size="12" x="826" y="664">
+isFull() : boolean</text>
+<text font-family="Dialog" font-size="12" x="826" y="681">
+toString() : String</text>
+<rect fill="#ffffff" height="126" stroke="#ffffff" stroke-width="1" width="216" x="14" y="414"/>
+<rect fill="none" height="126" stroke="#000000" stroke-width="1" width="216" x="14" y="414"/>
+<text font-family="Dialog" font-size="12" x="104" y="428">
+Wheel</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="216" x="14" y="438"/>
+<text font-family="Dialog" font-size="12" x="18" y="453">
+slices : Array&lt;Slice&gt;</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="216" x="14" y="463"/>
+<text font-family="Dialog" font-size="12" x="18" y="478">
+addSlice(name : String,type : Int)</text>
+<text font-family="Dialog" font-size="12" x="18" y="495">
+getSlice(type : int)</text>
+<text font-family="Dialog" font-size="12" x="18" y="512">
+spin()</text>
+<text font-family="Dialog" font-size="12" x="18" y="529">
+toString() : String</text>
+<polyline fill="none" points="118,622 118,539" stroke="#000000" stroke-width="1"/>
+<polygon fill="#000000" points="118,539 123,549 118,559 113,549" stroke="#000000" stroke-width="1"/>
+<polygon fill="none" points="118,539 123,549 118,559 113,549" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="94" y="606">
+12</text>
+<text font-family="Dialog" font-size="12" x="97" y="567">
+1</text>
+<rect fill="#ffffff" height="194" stroke="#ffffff" stroke-width="1" width="216" x="1254" y="470"/>
+<rect fill="none" height="194" stroke="#000000" stroke-width="1" width="216" x="1254" y="470"/>
+<text font-family="Dialog" font-size="12" x="1337" y="484">
+Question</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="216" x="1254" y="494"/>
+<text font-family="Dialog" font-size="12" x="1258" y="509">
+question : String</text>
+<text font-family="Dialog" font-size="12" x="1258" y="526">
+answer : String</text>
+<text font-family="Dialog" font-size="12" x="1258" y="543">
+value : int</text>
+<text font-family="Dialog" font-size="12" x="1258" y="560">
+beenAnswered : boolean</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="216" x="1254" y="570"/>
+<text font-family="Dialog" font-size="12" x="1258" y="585">
+getQuestion() : String</text>
+<text font-family="Dialog" font-size="12" x="1258" y="602">
+getAnswer() : String</text>
+<text font-family="Dialog" font-size="12" x="1258" y="619">
+getValue() : int</text>
+<text font-family="Dialog" font-size="12" x="1258" y="636">
+answer() : int</text>
+<text font-family="Dialog" font-size="12" x="1258" y="653">
+beenAnswered() : boolean</text>
+<polyline fill="none" points="1149,566 1254,566" stroke="#000000" stroke-width="1"/>
+<polygon fill="#000000" points="1149,566 1159,561 1169,566 1159,571" stroke="#000000" stroke-width="1"/>
+<polygon fill="none" points="1149,566 1159,561 1169,566 1159,571" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="1169" y="582">
+1</text>
+<text font-family="Dialog" font-size="12" x="1226" y="582">
+5</text>
+<rect fill="#ffffff" height="291" stroke="#ffffff" stroke-width="1" width="408" x="270" y="454"/>
+<rect fill="none" height="291" stroke="#000000" stroke-width="1" width="408" x="270" y="454"/>
+<text font-family="Dialog" font-size="12" x="457" y="468">
+Board</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="408" x="270" y="478"/>
+<text font-family="Dialog" font-size="12" x="274" y="493">
+categories : Array&lt;Category&gt;</text>
+<text font-family="Dialog" font-size="12" x="274" y="510">
+currentCategory : int</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="408" x="270" y="526"/>
+<text font-family="Dialog" font-size="12" x="274" y="541">
+addCategory(category : String)</text>
+<text font-family="Dialog" font-size="12" x="274" y="558">
+addQuestion(category : int,question : String,answer : String,value : int)</text>
+<text font-family="Dialog" font-size="12" x="274" y="575">
+answer(category : int) : int</text>
+<text font-family="Dialog" font-size="12" x="274" y="592">
+categoryEmpty(category : int) : boolean</text>
+<text font-family="Dialog" font-size="12" x="274" y="609">
+getAnswer(category : int) : String</text>
+<text font-family="Dialog" font-size="12" x="274" y="626">
+getCategory(category : int) : String</text>
+<text font-family="Dialog" font-size="12" x="274" y="643">
+getCurrentCategory(category : int) : String</text>
+<text font-family="Dialog" font-size="12" x="274" y="660">
+getQuestion(category : int) : String</text>
+<text font-family="Dialog" font-size="12" x="274" y="677">
+getValue(category : int) : int</text>
+<text font-family="Dialog" font-size="12" x="274" y="694">
+isEmpty() : boolean</text>
+<text font-family="Dialog" font-size="12" x="274" y="711">
+isFull() : boolean</text>
+<text font-family="Dialog" font-size="12" x="274" y="728">
+toString() : String</text>
+<polyline fill="none" points="822,478 677,478" stroke="#000000" stroke-width="1"/>
+<polygon fill="#000000" points="677,478 687,473 697,478 687,483" stroke="#000000" stroke-width="1"/>
+<polygon fill="none" points="677,478 687,473 697,478 687,483" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="794" y="494">
+6</text>
+<text font-family="Dialog" font-size="12" x="697" y="494">
+1</text>
+<rect fill="#ffffff" height="194" stroke="#ffffff" stroke-width="1" width="320" x="158" y="150"/>
+<rect fill="none" height="194" stroke="#000000" stroke-width="1" width="320" x="158" y="150"/>
+<text font-family="Dialog" font-size="12" x="301" y="164">
+Game</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="320" x="158" y="174"/>
+<text font-family="Dialog" font-size="12" x="162" y="189">
+gameBoards : Array&lt;Board&gt;</text>
+<text font-family="Dialog" font-size="12" x="162" y="206">
+gameWheels : Array&lt;Wheel&gt;</text>
+<text font-family="Dialog" font-size="12" x="162" y="223">
+round : int</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="320" x="158" y="233"/>
+<text font-family="Dialog" font-size="12" x="162" y="248">
+getSlice(type : int)</text>
+<text font-family="Dialog" font-size="12" x="162" y="265">
+getQuestion(category : int) : String</text>
+<text font-family="Dialog" font-size="12" x="162" y="282">
+getTurn() : int</text>
+<text font-family="Dialog" font-size="12" x="162" y="299">
+switchRounds()</text>
+<text font-family="Dialog" font-size="12" x="162" y="316">
+answer(category : int) : Question</text>
+<text font-family="Dialog" font-size="12" x="162" y="333">
+boardEmpty() : boolean</text>
+<rect fill="#ffffff" height="398" stroke="#ffffff" stroke-width="1" width="352" x="622" y="14"/>
+<rect fill="none" height="398" stroke="#000000" stroke-width="1" width="352" x="622" y="14"/>
+<text font-family="Dialog" font-size="12" x="771" y="28">
+Controller</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="352" x="622" y="38"/>
+<text font-family="Dialog" font-size="12" x="626" y="53">
+game : Game</text>
+<text font-family="Dialog" font-size="12" x="626" y="70">
+players : Array&lt;Player&gt;</text>
+<text font-family="Dialog" font-size="12" x="626" y="87">
+turnsLeft : int</text>
+<text font-family="Dialog" font-size="12" x="626" y="104">
+turn : int</text>
+<text font-family="Dialog" font-size="12" x="626" y="121">
+timer : Timer</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="352" x="622" y="131"/>
+<text font-family="Dialog" font-size="12" x="626" y="146">
+addPlayers()</text>
+<text font-family="Dialog" font-size="12" x="626" y="163">
+loadData(inputFile : String)</text>
+<text font-family="Dialog" font-size="12" x="626" y="180">
+display()</text>
+<text font-family="Dialog" font-size="12" x="626" y="197">
+beginGame()</text>
+<text font-family="Dialog" font-size="12" x="626" y="214">
+promptActor() : String</text>
+<text font-family="Dialog" font-size="12" x="626" y="231">
+takeTurn() : int</text>
+<text font-family="Dialog" font-size="12" x="626" y="248">
+declareWinner() : int</text>
+<text font-family="Dialog" font-size="12" x="626" y="265">
+getTurn() : int</text>
+<text font-family="Dialog" font-size="12" x="626" y="282">
+switchRounds()</text>
+<text font-family="Dialog" font-size="12" x="626" y="299">
+loseTurn(player : int)</text>
+<text font-family="Dialog" font-size="12" x="626" y="316">
+freeTurn(player : int)</text>
+<text font-family="Dialog" font-size="12" x="626" y="333">
+playersChoice(player : int)</text>
+<text font-family="Dialog" font-size="12" x="626" y="350">
+opponentsChoice(player : int)</text>
+<text font-family="Dialog" font-size="12" x="626" y="367">
+bankruptcy(player : int)</text>
+<text font-family="Dialog" font-size="12" x="626" y="384">
+doubleScore(player : int)</text>
+<text font-family="Dialog" font-size="12" x="626" y="401">
+timesUp()</text>
+<rect fill="#ffffff" height="304" stroke="#ffffff" stroke-width="1" width="360" x="1102" y="62"/>
+<rect fill="none" height="304" stroke="#000000" stroke-width="1" width="360" x="1102" y="62"/>
+<text font-family="Dialog" font-size="12" x="1265" y="76">
+Player</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="360" x="1102" y="86"/>
+<text font-family="Dialog" font-size="12" x="1106" y="101">
+playerIndex : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="118">
+roundScore : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="135">
+totalScore : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="152">
+tokens : int</text>
+<rect fill="#000000" height="1" stroke="#000000" stroke-width="1" width="360" x="1102" y="174"/>
+<text font-family="Dialog" font-size="12" x="1106" y="189">
+awardPoints(points : int)</text>
+<text font-family="Dialog" font-size="12" x="1106" y="206">
+awardToken()</text>
+<text font-family="Dialog" font-size="12" x="1106" y="223">
+bankruptcy()</text>
+<text font-family="Dialog" font-size="12" x="1106" y="240">
+doubleScore()</text>
+<text font-family="Dialog" font-size="12" x="1106" y="257">
+getPlayerIndex() : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="274">
+getRoundScore() : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="291">
+getTokens() : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="308">
+getTotalScore() : int</text>
+<text font-family="Dialog" font-size="12" x="1106" y="325">
+switchRounds()</text>
+<text font-family="Dialog" font-size="12" x="1106" y="342">
+useToken() : boolean</text>
+<polyline fill="none" points="158,414 158,343" stroke="#000000" stroke-width="1"/>
+<polygon fill="#000000" points="158,343 163,353 158,363 153,353" stroke="#000000" stroke-width="1"/>
+<polygon fill="none" points="158,343 163,353 158,363 153,353" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="137" y="398">
+1</text>
+<text font-family="Dialog" font-size="12" x="137" y="370">
+1</text>
+<polyline fill="none" points="438,343 438,454" stroke="#000000" stroke-width="1"/>
+<polygon fill="#000000" points="438,343 443,353 438,363 433,353" stroke="#000000" stroke-width="1"/>
+<polygon fill="none" points="438,343 443,353 438,363 433,353" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="445" y="403">
+provides questions</text>
+<text font-family="Dialog" font-size="12" x="451" y="371">
+1</text>
+<text font-family="Dialog" font-size="12" x="451" y="438">
+1</text>
+<polyline fill="none" points="477,246 622,246" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="505" y="226">
+passes player intent</text>
+<text font-family="Dialog" font-size="12" x="491" y="242">
+1</text>
+<text font-family="Dialog" font-size="12" x="603" y="242">
+1</text>
+<polyline fill="none" points="973,190 1102,190" stroke="#000000" stroke-width="1"/>
+<text font-family="Dialog" font-size="12" x="993" y="170">
+takes turns playing</text>
+<text font-family="Dialog" font-size="12" x="984" y="186">
+1</text>
+<text font-family="Dialog" font-size="12" x="1083" y="186">
+2</text>
+</svg>
