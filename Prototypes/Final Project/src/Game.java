@@ -20,7 +20,7 @@ public class Game
 	private Board [] gameBoards; // round 1 and 2 boards
 	private Wheel [] gameWheels; // round 1 and 2 boards
 	
-	private int roundsLeft;
+	//private int roundsLeft;
 	private int round;	// current round we're on
 	
 	// player objects
@@ -40,28 +40,13 @@ public class Game
 		this.gameWheels[0] = new Wheel();
 		this.gameWheels[1] = new Wheel();
 
-		this.roundsLeft = 8; // 50 - spins per round
+		//this.roundsLeft = 8; // 50 - spins per round
 		this.round = 0;
 		this.turn = 0;
 		
-		// add players into the game
-		this.players = new Player[2];
-		addPlayers();
-		
-		// load data into board & wheel
 		loadData(inputFile);
 	}
 	
-	/**
-	 * This function adds two players to the game.
-	 */
-	private void addPlayers()
-	{
-		for (int i=0;i<2;i++)
-		{
-			this.players[i] = new Player(i);
-		}
-	}
 	
 	/**
 	 * Returns whose turn it is to play
@@ -77,7 +62,7 @@ public class Game
 	 * data into both the game board and wheel. 
 	 * @param inputFile file containing questions
 	 */
-	private void loadData(String inputFile)
+	public void loadData(String inputFile)
 	{
 		try
 		{
@@ -170,48 +155,37 @@ public class Game
 	}
 	
 	/**
+	 * Returns whether all the questions have been answered in the current 
+	 * round or not
+	 * @return
+	 */
+	public boolean isEmpty()
+	{
+		return this.gameBoards[this.round].isEmpty();
+	}
+	
+	/**
+	 * Switches round of the game.
+	 * @return true if game over
+	 */
+	public boolean switchRounds()
+	{
+		if (this.round == 1)
+		{
+			return true;
+		}
+		else
+		{
+			this.round ++;
+		}
+		return false;
+	}
+	
+	/**
 	 * This function has the basic functionality of answering a question
 	 */
 	public void takeTurn()
 	{
-		System.out.println("Spins Left: " + this.roundsLeft);
-		// decrement rounds
-		this.roundsLeft --;
-		if (this.roundsLeft < 0 || this.gameBoards[this.round].isEmpty())
-		{ //switch rounds
-			if (this.round == 1)
-			{
-				System.out.println("GAME OVER!!!");
-				System.out.println("Total Scores:");
-				this.players[0].switchRounds();
-				this.players[1].switchRounds();
-				System.out.println("Player 0 " + this.players[0].getTotalScore());
-				System.out.println("Player 1 " + this.players[1].getTotalScore());
-				int winner = declareWinner();
-				if (winner != -1)
-				{
-					System.out.println(" PLAYER " + winner + " WINS!!!");
-				}
-				else
-				{
-					System.out.println("ITS A TIE!!!!");
-				}
-				System.exit(1);
-				return;
-			}
-			System.out.println("----------");
-			System.out.println("NEW ROUND!!");
-			System.out.println("----------");
-			
-			this.roundsLeft = 8; 	// reset round counter
-			this.round ++;			// move to next round
-			
-			// set player scores 
-			this.players[0].switchRounds();
-			this.players[1].switchRounds();
-			return;
-		}
-		
 		// spin the wheel
 		int slice = this.gameWheels[this.round].spin();
 

@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 /**
 	This is the main startup file for Prototype 2 of the Wheel of Jeopardy
 	game. 
@@ -10,6 +12,7 @@ import java.io.FileReader;
 
 public class WheelOfJeopardy
 {
+
 	public static void main(String [] args)
 	{
 		String myInputFile = "input/real_questions.txt"; //args[0];//
@@ -20,9 +23,39 @@ public class WheelOfJeopardy
 			readIn.close();
 			
 			// Make sure data is loaded in properly
-			Game newGame = new Game(myInputFile);
+			Controller newGame = new Controller(myInputFile);
+			//Game newGame = new Game(myInputFile);
 			System.out.println(newGame.toString());
+			System.out.println("=================================");
+			System.out.println("Welcome to Wheel of Jeopardy!");
+			System.out.println("=================================");
 			
+			Scanner userInput = new Scanner(System.in);
+	        int userResponse = -1;
+			while (!newGame.isGameOver())
+			{
+				while (!((userResponse ==0) || (userResponse == 1))) 
+	            {
+                    System.out.println(newGame.printOptions());
+	                // Make sure user input is valid
+	                try
+	                {
+	                    userResponse = userInput.nextInt();
+	                }
+	                catch (InputMismatchException a)
+	                { // Non integer input, reset user input
+	                    userInput.next();                     
+	                }
+
+	            }
+				if (userResponse == 1)
+				{
+					System.out.println("Taking turn!");
+					newGame.takeTurn();
+				}
+				userResponse = -1;
+			}
+			/*
 			int turnsLeft = 18; // for testing
 			while (turnsLeft > 0)
 			{
@@ -33,7 +66,7 @@ public class WheelOfJeopardy
 				System.out.println(newGame.displayPoints());
 				System.out.println("------------------");
 			}
-			
+			*/
 			//Test answering questions
 			/*
 			newGame.takeTurn();
