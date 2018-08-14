@@ -119,6 +119,16 @@ public class Controller
 		}
 		else if (slice == 6)
 		{ // lose turn
+			if (this.players[this.turn].getTokens() > 0)
+			{
+				System.out.println("Would you like to use a token?");
+				int response = processInput(0, 1);
+				if (response == 1) // yes!
+				{
+					this.players[this.turn].useToken();
+					return;
+				}
+			}
 			this.turn = (this.turn +1) % this.players.length;
 		}
 		else if (slice == 7)
