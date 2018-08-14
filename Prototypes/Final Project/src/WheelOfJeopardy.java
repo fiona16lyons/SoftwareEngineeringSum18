@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class WheelOfJeopardy
 {
-
+	public static Scanner userInput = new Scanner(System.in);
 	public static void main(String [] args)
 	{
 		String myInputFile = "input/real_questions.txt"; //args[0];//
@@ -30,15 +30,17 @@ public class WheelOfJeopardy
 			System.out.println("Welcome to Wheel of Jeopardy!");
 			System.out.println("=================================");
 			
-			Scanner userInput = new Scanner(System.in);
+			
 	        int userResponse = -1;
 			while (!newGame.isGameOver())
 			{
 				while (!((userResponse ==0) || (userResponse == 1))) 
 	            {
-                    System.out.println(newGame.printOptions());
+                    System.out.println(newGame.displayPoints());
+					System.out.println(newGame.printOptions());
 	                // Make sure user input is valid
-	                try
+	                if (userInput.hasNext())
+                    try
 	                {
 	                    userResponse = userInput.nextInt();
 	                }
@@ -50,42 +52,15 @@ public class WheelOfJeopardy
 	            }
 				if (userResponse == 1)
 				{
-					System.out.println("Taking turn!");
 					newGame.takeTurn();
 				}
 				userResponse = -1;
 			}
-			/*
-			int turnsLeft = 18; // for testing
-			while (turnsLeft > 0)
-			{
-				System.out.println("It's Player " + newGame.getTurn() + "'s turn!");
-				newGame.takeTurn();
-				turnsLeft --;
-				System.out.println("----- SCORES -----");
-				System.out.println(newGame.displayPoints());
-				System.out.println("------------------");
-			}
-			*/
-			//Test answering questions
-			/*
-			newGame.takeTurn();
-			System.out.println("===========");
-			newGame.takeTurn();
-			System.out.println("===========");
-			newGame.takeTurn();
-			System.out.println("===========");
-			newGame.takeTurn();
-			System.out.println("===========");
-			newGame.takeTurn();
-			System.out.println("===========");
-			newGame.takeTurn();
-			System.out.println("===========");
-			*/
+			userInput.close();
 		}
 		catch (Exception e)
 		{
-			System.out.println("Exception caught: " + e.getMessage());
+			System.out.println("Exception caught: " + e);
 			System.out.println("Stack Trace: " + e.getStackTrace());
 			System.out.println("Unable to read input file :-(");
 		}

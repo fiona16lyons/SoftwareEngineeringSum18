@@ -1,3 +1,5 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
 import java.util.Timer;
 
 /**
@@ -87,6 +89,8 @@ public class Controller
 	{
 		// decrement rounds
 		this.turnsLeft--;
+		System.out.println("Player " + this.turn + " taking turn! ");
+		
 		if (this.turnsLeft < 0 || this.game.isEmpty())
 		{ //switch rounds
 			this.gameOver =switchRounds();
@@ -94,32 +98,24 @@ public class Controller
 		}
 		
 		// spin the wheel
-		int slice = this.gameWheels[this.round].spin();
-
-		//print category
-		System.out.println("You got " + slice + " : " + this.gameWheels[this.round].getSlice(slice) + "!");
+		
+		int slice = -1;
+		try
+		{
+			slice = this.game.takeTurn();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Unknown exception occured while taking turn.");
+			System.exit(0);
+		}
+		
+		System.out.println("You got: " + this.game.printSlice(slice));
 		
 		// select the question in the category if possible
 		if (slice >= 0 && slice < 6)
 		{
-			System.out.println("Selected category: " + this.gameBoards[this.round].getCategory(slice));
-			if (!this.gameBoards[this.round].categoryEmpty(slice))
-			{
-				System.out.println("Upcoming Question: " + this.gameBoards[this.round].getQuestion(slice));
-				System.out.println("Upcoming Answer: " + this.gameBoards[this.round].getAnswer(slice));
-				
-				// assume the player always answers right for now
-				int val = this.gameBoards[this.round].answer(slice);
-				System.out.println("Awarding " + val + " points to player " + this.turn);
-				this.players[this.turn].awardPoints(val);
-				
-				// increment turn
-				this.turn = (this.turn +1) % this.players.length;
-			}
-			else
-			{
-				System.out.println("Category empty! Spin again.");
-			}
+			answerQuestion(slice);
 		}
 		else if (slice == 6)
 		{ // lose turn
@@ -131,11 +127,13 @@ public class Controller
 		}
 		else if (slice == 8)
 		{ // Player's choice
-			this.turn = (this.turn +1) % this.players.length;
+			answerQuestion(processInput(0,5));
 		}
 		else if (slice == 9)
 		{ // Opponents choice
+			// switch player
 			this.turn = (this.turn +1) % this.players.length;
+			answerQuestion(processInput(0,5)); 
 		}
 		else if (slice == 10)
 		{ // bankruptcy
@@ -147,7 +145,91 @@ public class Controller
 			this.players[this.turn].doubleScore();
 			this.turn = (this.turn +1) % this.players.length;
 		}
-		
+	}
+	
+	/**
+	 * 
+	 * @param category
+	 */
+	private void answerQuestion(int category)
+	{
+		if (!this.game.categoryEmpty(category))
+		{
+			System.out.println(this.game.getQuestion(category));
+			// query user for if the response is correct or not
+			int isCorrect = processInput(0,1);
+			
+			switch (isCorrect)
+			{
+			case 0: //incorrect
+				System.out.println("Incorrect!");
+				System.out.println("The answer is: " + this.game.getAnswer(category));
+				this.players[this.turn].awardPoints(-this.game.answer(category));
+				break;
+			case 1: //correct
+				System.out.println("Correct!");
+				System.out.println("The answer is: " + this.game.getAnswer(category));
+				this.players[this.turn].awardPoints(this.game.answer(category));
+				break;
+			}
+			// increment turn
+			this.turn = (this.turn +1) % this.players.length;
+		}
+			// else : System.out.println("Category empty! Spin again.");
+	}
+	
+	/**
+	 * This function processes actor input into an integer
+	 * @param min minimum acceptable integer
+	 * @param max maximum acceptable integer
+	 * @return integer input by actor
+	 */
+	private int processInput(int min, int max)
+	{
+		int userResponse = -1;
+		while (!((userResponse >= min) && (userResponse <= max))) 
+        {
+            // Make sure user input is valid
+            try
+            {
+                userResponse = WheelOfJeopardy.userInput.nextInt();
+            }
+            catch (InputMismatchException a)
+            { // Non integer input, reset user input
+            	WheelOfJeopardy.userInput.next();                     
+            }
+
+        }
+		return userResponse;
+	}
+	
+	public String displayPoints()
+	{
+		String rtn = "";
+		rtn += "Player 0 : " + this.players[0].getRoundScore() + "\t" + this.players[0].getTotalScore() + "\tTokens: " + this.players[0].getTokens() + "\n";
+		rtn += "Player 1 : " + this.players[1].getRoundScore() + "\t" + this.players[1].getTotalScore()+ "\tTokens: " + this.players[1].getTokens();
+		return rtn;
+	}
+	
+	/**
+	 * This function returns the index of the player that wins, or declares a
+	 * tie
+	 * @return index of winner, -1 if tie
+	 */
+	public int declareWinner()
+	{
+		if (this.players[0].getTotalScore() > this.players[1].getTotalScore())
+		{
+			return 0;
+		}
+		else if (this.players[0].getTotalScore() < this.players[1].getTotalScore())
+		{
+			return 1;
+		}
+		else
+		{ //tie!
+			return -1;
+		}
 	}
 	
 }
