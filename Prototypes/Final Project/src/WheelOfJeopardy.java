@@ -27,14 +27,13 @@ public class WheelOfJeopardy
 			//Game newGame = new Game(myInputFile);
 			System.out.println(newGame.toString());
 			System.out.println("=================================");
+			System.out.println("=================================");
 			System.out.println("Welcome to Wheel of Jeopardy!");
 			System.out.println("=================================");
-			
-			
 	        int userResponse = -1;
 			while (!newGame.isGameOver())
 			{
-				while (!((userResponse ==0) || (userResponse == 1))) 
+				while (!((userResponse ==0) || (userResponse == 1) || userResponse == 2)) 
 	            {
                     System.out.println(newGame.displayPoints());
 					System.out.println(newGame.printOptions());
@@ -53,6 +52,11 @@ public class WheelOfJeopardy
 				if (userResponse == 1)
 				{
 					newGame.takeTurn();
+				}
+				else if (userResponse == 2)
+				{
+					System.out.println(newGame.displayBoard());
+					userResponse = -1;
 				}
 				userResponse = -1;
 			}

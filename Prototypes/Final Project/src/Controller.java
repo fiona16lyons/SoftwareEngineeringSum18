@@ -63,11 +63,25 @@ public class Controller
 		return this.gameOver;
 	}
 	
+	/**
+	 * This function returns the game board and wheel as a string
+	 * @return
+	 */
+	public String displayBoard()
+	{
+		return this.game.toString();
+	}
+	
+	/**
+	 * This function prints the options available on a given turn
+	 * @return
+	 */
 	public String printOptions()
 	{
 		String rtn = "";
 		rtn += "Options:\n";
-		rtn += "	1: Take Turn\n";
+		rtn += "\t1: Take Turn\n";
+		rtn += "\t2: Display Board\n";
 		return rtn;	
 	}
 	
@@ -121,7 +135,7 @@ public class Controller
 		{ // lose turn
 			if (this.players[this.turn].getTokens() > 0)
 			{
-				System.out.println("Would you like to use a token?");
+				System.out.println("Would you like to use a token? Press 1 for yes, 0 for no. ");
 				int response = processInput(0, 1);
 				if (response == 1) // yes!
 				{
@@ -216,8 +230,13 @@ public class Controller
 	public String displayPoints()
 	{
 		String rtn = "";
+		rtn += "=================================\n";
 		rtn += "Player 0 : " + this.players[0].getRoundScore() + "\t" + this.players[0].getTotalScore() + "\tTokens: " + this.players[0].getTokens() + "\n";
-		rtn += "Player 1 : " + this.players[1].getRoundScore() + "\t" + this.players[1].getTotalScore()+ "\tTokens: " + this.players[1].getTokens();
+		rtn += "Player 1 : " + this.players[1].getRoundScore() + "\t" + this.players[1].getTotalScore()+ "\tTokens: " + this.players[1].getTokens() + "\n";
+		rtn += "\tTurns Left in Round: " + this.turnsLeft + "\n";
+		rtn += "=================================\n";
+		rtn += "\tIt's Player " + this.turn + "'s turn!\n";
+		rtn += "=================================";
 		return rtn;
 	}
 	
