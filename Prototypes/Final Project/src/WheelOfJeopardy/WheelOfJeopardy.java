@@ -157,6 +157,19 @@ public class WheelOfJeopardy extends Application
 				userResponse = -1;
 			}
 			userInput.close();
+			System.out.println("GAME OVER!!");
+			System.out.println("Final scores are: ");
+			System.out.println(newGame.displayFinalPoints());
+			int winner = newGame.declareWinner() ;
+			if (winner != -1)
+			{
+				System.out.println("The winner is Player " + winner+ " !!! ");
+			}
+			else
+			{
+				System.out.println("It's a tie!!");
+			}
+			System.exit(1);
 		}
 		catch (Exception e)
 		{

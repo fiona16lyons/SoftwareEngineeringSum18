@@ -92,6 +92,10 @@ public class Controller
 	 */
 	private boolean switchRounds()
 	{
+		System.out.println("=================================");
+		System.out.println("		ROUND OVER !!");
+		System.out.println("=================================");
+		this.turnsLeft = 50;
 		this.players[0].switchRounds();
 		this.players[1].switchRounds();
 		return this.game.switchRounds();
@@ -106,7 +110,7 @@ public class Controller
 		this.turnsLeft--;
 		System.out.println("Player " + this.turn + " taking turn! ");
 		
-		if (this.turnsLeft < 0 || this.game.isEmpty())
+		if (this.turnsLeft <= 0 || this.game.isEmpty())
 		{ //switch rounds
 			this.gameOver =switchRounds();
 			return;
@@ -130,6 +134,7 @@ public class Controller
 		// select the question in the category if possible
 		if (slice >= 0 && slice < 6)
 		{
+			System.out.println("Press 1 for correct answer, 0 for incorrect answer.");
 			answerQuestion(slice);
 		}
 		else if (slice == 6)
@@ -152,13 +157,18 @@ public class Controller
 		}
 		else if (slice == 8)
 		{ // Player's choice
+			System.out.println(displayBoard());
+			System.out.println("Select the number of the category you wish to choose (0-5)");
 			answerQuestion(processInput(0,5));
 		}
 		else if (slice == 9)
 		{ // Opponents choice
 			// switch player
-			this.turn = (this.turn +1) % this.players.length;
-			answerQuestion(processInput(0,5)); 
+			System.out.println(displayBoard());
+			System.out.println("Select the number of the category you wish to choose (0-5)");
+			// make sure we don't increment turn if the question is invalid
+			boolean hasQuestion = answerQuestion(processInput(0,5));
+			if (hasQuestion) this.turn = (this.turn +1) % this.players.length;
 		}
 		else if (slice == 10)
 		{ // bankruptcy
@@ -175,12 +185,13 @@ public class Controller
 	/**
 	 * 
 	 * @param category
+	 * @return true if category not empty
 	 */
-	private void answerQuestion(int category)
+	private boolean answerQuestion(int category)
 	{
 		if (!this.game.categoryEmpty(category))
 		{
-			System.out.println(this.game.getQuestion(category));
+			System.out.println("The question is: " + this.game.getQuestion(category));
 			// query user for if the response is correct or not
 			int isCorrect = processInput(0,1);
 			
@@ -199,8 +210,13 @@ public class Controller
 			}
 			// increment turn
 			this.turn = (this.turn +1) % this.players.length;
+			return true;
 		}
-			// else : System.out.println("Category empty! Spin again.");
+		else
+		{
+			System.out.println("Category empty! Spin again.");
+			return false;
+		}
 	}
 	
 	/**
@@ -226,6 +242,16 @@ public class Controller
 
         }
 		return userResponse;
+	}
+	
+	public String displayFinalPoints()
+	{
+		String rtn = "";
+		rtn += "=================================\n";
+		rtn += "Player 0 : " + this.players[0].getTotalScore()+ "\n";
+		rtn += "Player 1 : " + this.players[1].getTotalScore()+ "\n";
+		rtn += "=================================";
+		return rtn;
 	}
 	
 	public String displayPoints()

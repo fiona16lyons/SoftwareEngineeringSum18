@@ -145,13 +145,9 @@ public class Game
 	public String toString()
 	{
 		String rtn = "";
-		rtn += this.gameWheels[0].toString();
+		rtn += this.gameWheels[this.round].toString();
 		rtn += "\n";
-		rtn += this.gameWheels[1].toString();
-		rtn += "\n";
-		rtn += this.gameBoards[0].toString();
-		rtn += "\n";
-		rtn += this.gameBoards[1].toString();
+		rtn += this.gameBoards[this.round].toString();
 		return rtn;
 	}
 	
