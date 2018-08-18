@@ -1,3 +1,4 @@
+package WheelOfJeopardy;
 import java.util.Random;
 
 /**

@@ -1,3 +1,4 @@
+package WheelOfJeopardy;
 /**
  * This is the class for the Slice object, contained in the Wheel class.
  * 

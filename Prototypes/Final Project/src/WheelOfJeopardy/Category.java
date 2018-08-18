@@ -1,3 +1,4 @@
+package WheelOfJeopardy;
 /**
  * This file contains the Category class. The questions in a category are 
  * stored in an array, which are loaded in descending order, but read out

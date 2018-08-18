@@ -1,3 +1,4 @@
+package WheelOfJeopardy;
 /**
  * This file introduces the Player class, which represents a player of the
  * game Wheel of Jeopardy.
